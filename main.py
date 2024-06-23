@@ -24,20 +24,20 @@ def guide_user(proposition, solution):
 
 
 def main():
-    # Variables + Lists
-    price = [5, 32, 1305, 10210, 400987]
-    object = ["stylo", "grosse BD", "PC Gamer", "Twingo 3", "maison à Royat"]
+
+    # Variables + Lists - Dictionary Version
+    price_of_objects = {"stylo": 5, "grosse BD": 32, "PC Gamer": 1305,
+                        "Twingo 3": 10210, "maison à Royat": 400987}
 
     # Welcome User
     slow_writing("Bienvenue au Juste Prix !")
     time.sleep(1)
     slow_writing("Pour trouver le juste prix, proposez un nombre et vous serrez guidé.")
 
-    # Computer chooses solution
-    i = random.randint(0,4) # generate i randomly
-    objet = object[i]
+    # Computer chooses solution - Dictionary Version
+    objet = random.choice(list(price_of_objects.keys()))
     slow_writing("Devinez le prix en euros de : " + objet)
-    solution = price[i]
+    solution = price_of_objects.get(objet)
 
     # Ask user input
     # Guide user to find right price
@@ -45,7 +45,7 @@ def main():
     test = 3
     while test != 0:
         try:
-            proposition = int(input("Proposez un nombre : ")) # Handling Value Error (Forcing Int)
+            proposition = int(input("Proposez un nombre : "))  # Handling Value Error (Forcing Int)
             test = guide_user(proposition,solution)
             if test == 0:
                 slow_writing("Gagné ! Le juste prix de " + objet + " est bien " + str(solution) + " euros.")
